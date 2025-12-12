@@ -15,7 +15,7 @@ import {
 } from '@/components/ui/dialog';
 import { toast } from 'sonner';
 import { deleteWebinar } from '@/lib/firebase';
-import { generateEmbedCode } from '@/lib/embed-code';
+import { generateEmbedCode, getAppDomain } from '@/lib/embed-code';
 import { formatDuration } from '@/lib/webinar-state';
 import type { Webinar } from '@/types';
 
@@ -33,8 +33,7 @@ export function WebinarCard({ webinar, onDelete }: WebinarCardProps) {
     webinar.thumbnailUrl ||
     `https://img.youtube.com/vi/${webinar.youtubeId}/hqdefault.jpg`;
 
-  const appDomain = typeof window !== 'undefined' ? window.location.host : '';
-  const embedCode = generateEmbedCode(webinar.id, appDomain);
+  const embedCode = generateEmbedCode(webinar.id);
 
   const handleDelete = async () => {
     setDeleting(true);

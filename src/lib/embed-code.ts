@@ -1,8 +1,24 @@
 /**
+ * Get the app domain from environment or window.location
+ */
+export function getAppDomain(): string {
+  // Use environment variable for production URL
+  if (process.env.NEXT_PUBLIC_APP_URL) {
+    return process.env.NEXT_PUBLIC_APP_URL.replace(/^https?:\/\//, '');
+  }
+  // Fallback to window.location.host for local development
+  if (typeof window !== 'undefined') {
+    return window.location.host;
+  }
+  return 'auto-webinar.vercel.app';
+}
+
+/**
  * Generate embed code for a webinar
  */
-export function generateEmbedCode(webinarId: string, appDomain: string): string {
-  const embedUrl = `https://${appDomain}/embed/${webinarId}`;
+export function generateEmbedCode(webinarId: string, appDomain?: string): string {
+  const domain = appDomain || getAppDomain();
+  const embedUrl = `https://${domain}/embed/${webinarId}`;
 
   return `<div style="position:relative; padding-bottom:56.25%; height:0; overflow:hidden;">
   <iframe src="${embedUrl}"
