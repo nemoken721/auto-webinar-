@@ -30,7 +30,7 @@ export default async function WatchPage({ params, searchParams }: WatchPageProps
 
   return (
     <main className="min-h-screen bg-black flex items-center justify-center">
-      <div className="w-full max-w-5xl">
+      <div className="w-full max-w-5xl webinar-page-container">
         <WebinarPlayer webinar={serializedWebinar} isPreview={isPreview} />
       </div>
     </main>

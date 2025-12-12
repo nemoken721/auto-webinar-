@@ -108,7 +108,7 @@ export function WebinarPlayer({ webinar, isEmbed = false, isPreview = false }: W
 
   if (loading) {
     return (
-      <div className="relative w-full aspect-video bg-black flex items-center justify-center">
+      <div className="webinar-video-container relative bg-black flex items-center justify-center">
         <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-white"></div>
       </div>
     );
@@ -117,7 +117,7 @@ export function WebinarPlayer({ webinar, isEmbed = false, isPreview = false }: W
   return (
     <div className="w-full">
       {/* Video Container */}
-      <div className="relative w-full aspect-video bg-black overflow-hidden">
+      <div className="webinar-video-container relative bg-black overflow-hidden">
         {/* YouTube Player Container - scaled up to hide UI elements outside viewport */}
         <div className="absolute inset-0 overflow-hidden">
           <div
