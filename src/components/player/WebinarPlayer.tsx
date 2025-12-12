@@ -33,14 +33,12 @@ export function WebinarPlayer({ webinar, isEmbed = false, isPreview = false }: W
   const effectiveState = isPreview ? 'ON_AIR' : state;
   const effectiveSeekPosition = isPreview ? 0 : seekPosition;
 
-  const [isMuted, setIsMuted] = useState(true);
-
-  // Handle entry - start muted for autoplay to work in iframes
+  // Handle entry - play video with sound on user click
   const handleEnter = useCallback(() => {
     if (!playerRef.current) return;
 
-    // Keep muted initially for autoplay to work in cross-origin iframes
-    playerRef.current.mute();
+    // Unmute and play - this works because it's triggered by user click
+    playerRef.current.unMute();
 
     if (effectiveSeekPosition && effectiveSeekPosition > 0) {
       playerRef.current.seekTo(effectiveSeekPosition);
@@ -48,20 +46,12 @@ export function WebinarPlayer({ webinar, isEmbed = false, isPreview = false }: W
 
     playerRef.current.play();
     setHasEntered(true);
-    setIsMuted(true);
 
     // Hide initial overlay after YouTube UI fades (about 3 seconds)
     setTimeout(() => {
       setShowInitialOverlay(false);
     }, 3500);
   }, [effectiveSeekPosition]);
-
-  // Handle unmute on user click
-  const handleUnmute = useCallback(() => {
-    if (!playerRef.current) return;
-    playerRef.current.unMute();
-    setIsMuted(false);
-  }, []);
 
   // Track current playback time for CTA
   useEffect(() => {
@@ -159,20 +149,6 @@ export function WebinarPlayer({ webinar, isEmbed = false, isPreview = false }: W
 
       {/* LIVE Badge */}
       {hasEntered && effectiveState === 'ON_AIR' && !showEndScreen && <LiveBadge />}
-
-      {/* Unmute Button - shown when video is playing but muted */}
-      {hasEntered && isMuted && !showEndScreen && !showInitialOverlay && (
-        <button
-          onClick={handleUnmute}
-          className="absolute bottom-20 left-1/2 -translate-x-1/2 z-30 px-6 py-3 bg-red-600 hover:bg-red-700 text-white rounded-lg font-bold shadow-lg transition-all animate-pulse hover:animate-none flex items-center gap-2"
-        >
-          <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>
-            <line x1="1" y1="1" x2="23" y2="23" stroke="currentColor" strokeWidth="2"/>
-          </svg>
-          タップして音声をオンにする
-        </button>
-      )}
 
       {/* Entry Overlay (BEFORE or ON_AIR without entry) */}
       {!hasEntered && !showEndScreen && (

@@ -15,6 +15,10 @@ const nextConfig: NextConfig = {
             key: 'Content-Security-Policy',
             value: "frame-ancestors *",
           },
+          {
+            key: 'Permissions-Policy',
+            value: 'autoplay=*, fullscreen=*, encrypted-media=*',
+          },
         ],
       },
     ];
