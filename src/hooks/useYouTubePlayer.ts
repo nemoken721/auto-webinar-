@@ -77,7 +77,8 @@ export function useYouTubePlayer({
         showinfo: 0,
         autohide: 1,
         cc_load_policy: 0,
-        origin: typeof window !== 'undefined' ? window.location.origin : '',
+        enablejsapi: 1,
+        origin: process.env.NEXT_PUBLIC_APP_URL || (typeof window !== 'undefined' ? window.location.origin : ''),
       },
       events: {
         onReady: () => {
