@@ -18,15 +18,15 @@ export function CTABanner({ visible, label, url, isEmbed = false }: CTABannerPro
           animate={{ y: 0, opacity: 1 }}
           exit={{ y: 20, opacity: 0 }}
           transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-          className="mt-4 px-2"
+          className="webinar-cta mt-2 sm:mt-4 px-2"
         >
           <a
             href={url}
             target={isEmbed ? '_blank' : '_self'}
             rel="noopener noreferrer"
-            className="block w-full py-4 px-6
+            className="block w-full py-2 sm:py-4 px-4 sm:px-6
                        bg-gradient-to-r from-orange-500 to-red-500
-                       text-white text-center text-lg font-bold rounded-xl
+                       text-white text-center text-sm sm:text-lg font-bold rounded-lg sm:rounded-xl
                        hover:from-orange-600 hover:to-red-600
                        transition-all duration-300
                        shadow-lg shadow-orange-500/30
