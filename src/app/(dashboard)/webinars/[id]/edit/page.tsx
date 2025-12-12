@@ -31,7 +31,7 @@ export default function EditWebinarPage() {
 
   if (loading) {
     return (
-      <div className="p-8 flex justify-center">
+      <div className="p-4 pt-16 md:pt-4 md:p-8 flex justify-center">
         <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-gray-900"></div>
       </div>
     );
@@ -39,17 +39,17 @@ export default function EditWebinarPage() {
 
   if (!webinar) {
     return (
-      <div className="p-8">
-        <h1 className="text-2xl font-bold">ウェビナーが見つかりません</h1>
+      <div className="p-4 pt-16 md:pt-4 md:p-8">
+        <h1 className="text-xl md:text-2xl font-bold">ウェビナーが見つかりません</h1>
       </div>
     );
   }
 
   return (
-    <div className="p-8 max-w-3xl mx-auto">
-      <div className="mb-8">
-        <h1 className="text-2xl font-bold">ウェビナー編集</h1>
-        <p className="text-gray-500 mt-1">{webinar.title}</p>
+    <div className="p-4 pt-16 md:pt-4 md:p-8 max-w-3xl mx-auto">
+      <div className="mb-6 md:mb-8">
+        <h1 className="text-xl md:text-2xl font-bold">ウェビナー編集</h1>
+        <p className="text-gray-500 text-sm md:text-base mt-1">{webinar.title}</p>
       </div>
 
       <WebinarForm mode="edit" webinar={webinar} />

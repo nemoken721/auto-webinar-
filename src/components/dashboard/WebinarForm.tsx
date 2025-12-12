@@ -164,7 +164,7 @@ export function WebinarForm({ webinar, mode }: WebinarFormProps) {
         <CardContent className="space-y-4">
           <div className="space-y-2">
             <Label htmlFor="youtubeUrl">YouTube URL *</Label>
-            <div className="flex gap-2">
+            <div className="flex flex-col sm:flex-row gap-2">
               <Input
                 id="youtubeUrl"
                 type="url"
@@ -174,12 +174,14 @@ export function WebinarForm({ webinar, mode }: WebinarFormProps) {
                   setFormData((prev) => ({ ...prev, youtubeUrl: e.target.value }))
                 }
                 required
+                className="flex-1"
               />
               <Button
                 type="button"
                 variant="outline"
                 onClick={fetchYouTubeInfo}
                 disabled={fetchingYouTube || !formData.youtubeId}
+                className="w-full sm:w-auto"
               >
                 {fetchingYouTube ? '取得中...' : '情報取得'}
               </Button>
@@ -201,7 +203,7 @@ export function WebinarForm({ webinar, mode }: WebinarFormProps) {
             />
           </div>
 
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div className="space-y-2">
               <Label htmlFor="duration">動画の長さ *</Label>
               <Input
@@ -329,11 +331,11 @@ export function WebinarForm({ webinar, mode }: WebinarFormProps) {
       </Card>
 
       {/* Actions */}
-      <div className="flex justify-end gap-4">
-        <Button type="button" variant="outline" onClick={() => router.back()}>
+      <div className="flex flex-col-reverse sm:flex-row justify-end gap-3 sm:gap-4">
+        <Button type="button" variant="outline" onClick={() => router.back()} className="w-full sm:w-auto">
           キャンセル
         </Button>
-        <Button type="submit" disabled={loading}>
+        <Button type="submit" disabled={loading} className="w-full sm:w-auto">
           {loading ? '保存中...' : mode === 'create' ? '作成する' : '更新する'}
         </Button>
       </div>

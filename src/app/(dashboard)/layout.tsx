@@ -15,7 +15,7 @@ export default function DashboardLayout({
       <AuthGuard>
         <div className="flex min-h-screen">
           <Sidebar />
-          <main className="flex-1 bg-gray-50">
+          <main className="flex-1 bg-gray-50 w-full md:w-auto">
             {children}
           </main>
         </div>

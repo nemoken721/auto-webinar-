@@ -33,14 +33,14 @@ export default function DashboardPage() {
   }, [user?.uid]);
 
   return (
-    <div className="p-8">
-      <div className="flex justify-between items-center mb-8">
+    <div className="p-4 pt-16 md:pt-4 md:p-8">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6 md:mb-8">
         <div>
-          <h1 className="text-2xl font-bold">ダッシュボード</h1>
-          <p className="text-gray-500 mt-1">ウェビナーの管理</p>
+          <h1 className="text-xl md:text-2xl font-bold">ダッシュボード</h1>
+          <p className="text-gray-500 text-sm md:text-base mt-1">ウェビナーの管理</p>
         </div>
         <Link href="/webinars/new">
-          <Button>
+          <Button className="w-full sm:w-auto">
             <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
             </svg>
