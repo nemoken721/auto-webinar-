@@ -14,11 +14,11 @@ export function CTABanner({ visible, label, url, isEmbed = false }: CTABannerPro
     <AnimatePresence>
       {visible && (
         <motion.div
-          initial={{ y: 100, opacity: 0 }}
+          initial={{ y: 20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
-          exit={{ y: 100, opacity: 0 }}
+          exit={{ y: 20, opacity: 0 }}
           transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-          className="absolute bottom-4 left-4 right-4 z-20"
+          className="mt-4 px-2"
         >
           <a
             href={url}

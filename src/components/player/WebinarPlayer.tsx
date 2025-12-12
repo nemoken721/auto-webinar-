@@ -115,52 +115,58 @@ export function WebinarPlayer({ webinar, isEmbed = false, isPreview = false }: W
   }
 
   return (
-    <div className="relative w-full aspect-video bg-black overflow-hidden">
-      {/* YouTube Player Container - scaled up to hide UI elements outside viewport */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div
-          className="absolute"
-          style={{
-            top: '-60px',
-            left: '-10px',
-            right: '-10px',
-            bottom: '-60px',
-            width: 'calc(100% + 20px)',
-            height: 'calc(100% + 120px)',
-          }}
-        >
-          <YouTubePlayer
-            ref={playerRef}
-            videoId={webinar.youtubeId}
-            className={`w-full h-full ${hasEntered ? 'opacity-100' : 'opacity-0'}`}
-          />
+    <div className="w-full">
+      {/* Video Container */}
+      <div className="relative w-full aspect-video bg-black overflow-hidden">
+        {/* YouTube Player Container - scaled up to hide UI elements outside viewport */}
+        <div className="absolute inset-0 overflow-hidden">
+          <div
+            className="absolute"
+            style={{
+              top: '-60px',
+              left: '-10px',
+              right: '-10px',
+              bottom: '-60px',
+              width: 'calc(100% + 20px)',
+              height: 'calc(100% + 120px)',
+            }}
+          >
+            <YouTubePlayer
+              ref={playerRef}
+              videoId={webinar.youtubeId}
+              className={`w-full h-full ${hasEntered ? 'opacity-100' : 'opacity-0'}`}
+            />
+          </div>
         </div>
+
+        {/* Initial overlay to hide YouTube UI during first few seconds */}
+        {hasEntered && showInitialOverlay && !showEndScreen && (
+          <div className="absolute inset-0 bg-black z-20 flex items-center justify-center transition-opacity duration-500">
+            <div className="text-white text-lg">読み込み中...</div>
+          </div>
+        )}
+
+        {/* Click Blocker */}
+        {hasEntered && !showEndScreen && <ClickBlocker />}
+
+        {/* LIVE Badge */}
+        {hasEntered && effectiveState === 'ON_AIR' && !showEndScreen && <LiveBadge />}
+
+        {/* Entry Overlay (BEFORE or ON_AIR without entry) */}
+        {!hasEntered && !showEndScreen && (
+          <EntryOverlay
+            thumbnailUrl={thumbnailUrl}
+            onEnter={handleEnter}
+            remainingSeconds={remainingSeconds}
+            isBeforeStart={effectiveState === 'BEFORE'}
+          />
+        )}
+
+        {/* End Screen */}
+        {showEndScreen && <EndScreen />}
       </div>
 
-      {/* Initial overlay to hide YouTube UI during first few seconds */}
-      {hasEntered && showInitialOverlay && !showEndScreen && (
-        <div className="absolute inset-0 bg-black z-20 flex items-center justify-center transition-opacity duration-500">
-          <div className="text-white text-lg">読み込み中...</div>
-        </div>
-      )}
-
-      {/* Click Blocker */}
-      {hasEntered && !showEndScreen && <ClickBlocker />}
-
-      {/* LIVE Badge */}
-      {hasEntered && effectiveState === 'ON_AIR' && !showEndScreen && <LiveBadge />}
-
-      {/* Entry Overlay (BEFORE or ON_AIR without entry) */}
-      {!hasEntered && !showEndScreen && (
-        <EntryOverlay
-          thumbnailUrl={thumbnailUrl}
-          onEnter={handleEnter}
-          remainingSeconds={remainingSeconds}
-          isBeforeStart={effectiveState === 'BEFORE'}
-        />
-      )}
-
-      {/* CTA Banner */}
+      {/* CTA Banner - Outside video, below the player */}
       {webinar.ctaSettings && !showEndScreen && (
         <CTABanner
           visible={showCTA}
@@ -169,9 +175,6 @@ export function WebinarPlayer({ webinar, isEmbed = false, isPreview = false }: W
           isEmbed={isEmbed}
         />
       )}
-
-      {/* End Screen */}
-      {showEndScreen && <EndScreen />}
     </div>
   );
 }
