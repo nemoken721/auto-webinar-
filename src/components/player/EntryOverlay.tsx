@@ -31,11 +31,11 @@ export function EntryOverlay({
       <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/50" />
 
       {/* Content */}
-      <div className="relative z-10 text-center text-white px-4">
+      <div className="relative z-10 text-center text-white px-3 sm:px-4">
         {isBeforeStart && remainingSeconds !== undefined && (
-          <div className="mb-8">
-            <p className="text-lg mb-2 text-white/80">開催まで あと</p>
-            <p className="text-5xl font-bold tabular-nums tracking-tight">
+          <div className="mb-4 sm:mb-8">
+            <p className="text-sm sm:text-lg mb-1 sm:mb-2 text-white/80">開催まで あと</p>
+            <p className="text-2xl sm:text-5xl font-bold tabular-nums tracking-tight">
               {formatCountdown(remainingSeconds)}
             </p>
           </div>
@@ -43,10 +43,10 @@ export function EntryOverlay({
 
         {!isBeforeStart && (
           <>
-            <p className="text-lg mb-6 text-white/90">配信中です</p>
+            <p className="text-xs sm:text-lg mb-3 sm:mb-6 text-white/90">配信中です</p>
             <button
               onClick={onEnter}
-              className="px-10 py-5 bg-red-600 hover:bg-red-700 rounded-xl text-xl font-bold
+              className="px-6 py-3 sm:px-10 sm:py-5 bg-red-600 hover:bg-red-700 rounded-lg sm:rounded-xl text-sm sm:text-xl font-bold
                          shadow-lg shadow-red-600/30 transition-all duration-300
                          animate-pulse hover:animate-none hover:scale-105
                          focus:outline-none focus:ring-4 focus:ring-red-500/50"
@@ -57,7 +57,7 @@ export function EntryOverlay({
         )}
 
         {isBeforeStart && (
-          <p className="mt-6 text-white/60 text-sm">
+          <p className="mt-4 sm:mt-6 text-white/60 text-[10px] sm:text-sm">
             開始時刻になりましたら、入場ボタンが表示されます
           </p>
         )}
