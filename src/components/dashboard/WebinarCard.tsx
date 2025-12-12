@@ -135,7 +135,7 @@ export function WebinarCard({ webinar, onDelete }: WebinarCardProps) {
             </DialogDescription>
           </DialogHeader>
           <div className="mt-4">
-            <pre className="bg-gray-100 p-4 rounded-lg overflow-x-auto text-sm whitespace-pre-wrap break-all">
+            <pre className="bg-gray-100 p-4 rounded-lg overflow-auto text-sm whitespace-pre-wrap break-all max-h-48">
               <code>{embedCode}</code>
             </pre>
           </div>
