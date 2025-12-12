@@ -24,7 +24,8 @@
       "Bash(npx vercel:*)",
       "Bash(git remote add:*)",
       "Bash(git branch:*)",
-      "Bash(git push:*)"
+      "Bash(git push:*)",
+      "Bash(del:*)"
     ],
     "deny": [],
     "ask": []
