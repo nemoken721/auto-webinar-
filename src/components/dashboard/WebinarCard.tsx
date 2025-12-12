@@ -33,7 +33,7 @@ export function WebinarCard({ webinar, onDelete }: WebinarCardProps) {
     webinar.thumbnailUrl ||
     `https://img.youtube.com/vi/${webinar.youtubeId}/hqdefault.jpg`;
 
-  const embedCode = generateEmbedCode(webinar.id);
+  const embedCode = generateEmbedCode(webinar.id, undefined, webinar.youtubeId);
 
   const handleDelete = async () => {
     setDeleting(true);
