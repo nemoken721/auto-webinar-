@@ -23,7 +23,8 @@ export function generateEmbedCode(webinarId: string, appDomain?: string): string
   return `<div style="position:relative; padding-bottom:56.25%; height:0; overflow:hidden;">
   <iframe src="${embedUrl}"
     style="position:absolute; top:0; left:0; width:100%; height:100%; border:0;"
-    allow="autoplay; fullscreen" allowfullscreen>
+    allow="autoplay; fullscreen; encrypted-media; accelerometer; gyroscope; clipboard-write; web-share"
+    allowfullscreen>
   </iframe>
 </div>`;
 }
